@@ -18,4 +18,3 @@ router = NetBoxRouter()
 router.register("backup-ops", BackupopsViewSet)
 
 urlpatterns = router.urls
-

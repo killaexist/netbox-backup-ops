@@ -15,56 +15,55 @@ class BackupopsViewTestCase(PluginViewTestCase):
     @classmethod
     def setUpTestData(cls):
         """Set up test data for all tests."""
-        Backupops.objects.create(name='View Test 1')
-        Backupops.objects.create(name='View Test 2')
-        Backupops.objects.create(name='View Test 3')
+        Backupops.objects.create(name="View Test 1")
+        Backupops.objects.create(name="View Test 2")
+        Backupops.objects.create(name="View Test 3")
 
     def setUp(self):
         """Set up each test."""
         super().setUp()
-        self.base_url = 'plugins:netbox_backup_ops:backupops'
+        self.base_url = "plugins:netbox_backup_ops:backupops"
 
     def test_list_backupopss(self):
         """Test Backupops list view."""
-        self.add_permissions('netbox_backup_ops.view_backupops')
+        self.add_permissions("netbox_backup_ops.view_backupops")
 
-        url = reverse('plugins:netbox_backup_ops:backupops_list')
+        url = reverse("plugins:netbox_backup_ops:backupops_list")
         response = self.client.get(url)
 
         self.assertHttpStatus(response, 200)
 
     def test_list_backupopss_without_permission(self):
         """Test Backupops list view without permission."""
-        url = reverse('plugins:netbox_backup_ops:backupops_list')
+        url = reverse("plugins:netbox_backup_ops:backupops_list")
 
-        with disable_warnings('django.request'):
+        with disable_warnings("django.request"):
             response = self.client.get(url)
             self.assertHttpStatus(response, 403)
 
     def test_view_backupops(self):
         """Test Backupops detail view."""
-        self.add_permissions('netbox_backup_ops.view_backupops')
+        self.add_permissions("netbox_backup_ops.view_backupops")
 
         instance = Backupops.objects.first()
-        url = reverse('plugins:netbox_backup_ops:backupops', kwargs={'pk': instance.pk})
+        url = reverse("plugins:netbox_backup_ops:backupops", kwargs={"pk": instance.pk})
         response = self.client.get(url)
 
         self.assertHttpStatus(response, 200)
-        self.assertEqual(response.context['object'], instance)
+        self.assertEqual(response.context["object"], instance)
 
     def test_create_backupops(self):
         """Test creating a Backupops via form."""
-        self.add_permissions(
-            'netbox_backup_ops.add_backupops',
-            'netbox_backup_ops.view_backupops'
+        self.add_permissions("netbox_backup_ops.add_backupops", "netbox_backup_ops.view_backupops")
+
+        url = reverse("plugins:netbox_backup_ops:backupops_add")
+        name = f"Created {get_random_string(10)}"
+
+        form_data = self.post_data(
+            {
+                "name": name,
+            }
         )
-
-        url = reverse('plugins:netbox_backup_ops:backupops_add')
-        name = f'Created {get_random_string(10)}'
-
-        form_data = self.post_data({
-            'name': name,
-        })
 
         response = self.client.post(url, form_data, follow=True)
         self.assertHttpStatus(response, 200)
@@ -75,26 +74,25 @@ class BackupopsViewTestCase(PluginViewTestCase):
 
     def test_create_backupops_without_permission(self):
         """Test creating a Backupops without permission."""
-        url = reverse('plugins:netbox_backup_ops:backupops_add')
+        url = reverse("plugins:netbox_backup_ops:backupops_add")
 
-        with disable_warnings('django.request'):
+        with disable_warnings("django.request"):
             response = self.client.get(url)
             self.assertHttpStatus(response, 403)
 
     def test_edit_backupops(self):
         """Test editing a Backupops via form."""
-        self.add_permissions(
-            'netbox_backup_ops.change_backupops',
-            'netbox_backup_ops.view_backupops'
-        )
+        self.add_permissions("netbox_backup_ops.change_backupops", "netbox_backup_ops.view_backupops")
 
         instance = Backupops.objects.first()
-        url = reverse('plugins:netbox_backup_ops:backupops_edit', kwargs={'pk': instance.pk})
+        url = reverse("plugins:netbox_backup_ops:backupops_edit", kwargs={"pk": instance.pk})
 
-        new_name = f'Edited {get_random_string(10)}'
-        form_data = self.post_data({
-            'name': new_name,
-        })
+        new_name = f"Edited {get_random_string(10)}"
+        form_data = self.post_data(
+            {
+                "name": new_name,
+            }
+        )
 
         response = self.client.post(url, form_data, follow=True)
         self.assertHttpStatus(response, 200)
@@ -105,29 +103,24 @@ class BackupopsViewTestCase(PluginViewTestCase):
 
     def test_delete_backupops(self):
         """Test deleting a Backupops."""
-        self.add_permissions(
-            'netbox_backup_ops.delete_backupops',
-            'netbox_backup_ops.view_backupops'
-        )
+        self.add_permissions("netbox_backup_ops.delete_backupops", "netbox_backup_ops.view_backupops")
 
         instance = Backupops.objects.first()
-        url = reverse('plugins:netbox_backup_ops:backupops_delete', kwargs={'pk': instance.pk})
+        url = reverse("plugins:netbox_backup_ops:backupops_delete", kwargs={"pk": instance.pk})
 
         # Confirm deletion
-        response = self.client.post(url, {'confirm': True}, follow=True)
+        response = self.client.post(url, {"confirm": True}, follow=True)
         self.assertHttpStatus(response, 200)
 
         # Verify object was deleted
-        self.assertFalse(
-            Backupops.objects.filter(pk=instance.pk).exists()
-        )
+        self.assertFalse(Backupops.objects.filter(pk=instance.pk).exists())
 
     def test_delete_backupops_without_permission(self):
         """Test deleting a Backupops without permission."""
         instance = Backupops.objects.first()
-        url = reverse('plugins:netbox_backup_ops:backupops_delete', kwargs={'pk': instance.pk})
+        url = reverse("plugins:netbox_backup_ops:backupops_delete", kwargs={"pk": instance.pk})
 
-        with disable_warnings('django.request'):
+        with disable_warnings("django.request"):
             response = self.client.get(url)
             self.assertHttpStatus(response, 403)
 
@@ -138,31 +131,28 @@ class BackupopsFormTestCase(PluginViewTestCase):
     def setUp(self):
         """Set up each test."""
         super().setUp()
-        self.add_permissions(
-            'netbox_backup_ops.add_backupops',
-            'netbox_backup_ops.view_backupops'
-        )
+        self.add_permissions("netbox_backup_ops.add_backupops", "netbox_backup_ops.view_backupops")
 
     def test_form_validation_empty_name(self):
         """Test form validation with empty name."""
-        url = reverse('plugins:netbox_backup_ops:backupops_add')
-        form_data = self.post_data({'name': ''})
+        url = reverse("plugins:netbox_backup_ops:backupops_add")
+        form_data = self.post_data({"name": ""})
 
         response = self.client.post(url, form_data)
         self.assertHttpStatus(response, 200)  # Form redisplay
 
         # Should not create object
-        self.assertEqual(Backupops.objects.filter(name='').count(), 0)
+        self.assertEqual(Backupops.objects.filter(name="").count(), 0)
 
     def test_form_validation_duplicate_name(self):
         """Test form validation with duplicate name."""
-        Backupops.objects.create(name='Duplicate')
+        Backupops.objects.create(name="Duplicate")
 
-        url = reverse('plugins:netbox_backup_ops:backupops_add')
-        form_data = self.post_data({'name': 'Duplicate'})
+        url = reverse("plugins:netbox_backup_ops:backupops_add")
+        form_data = self.post_data({"name": "Duplicate"})
 
         response = self.client.post(url, form_data)
         self.assertHttpStatus(response, 200)  # Form redisplay
 
         # Should only have one instance with this name
-        self.assertEqual(Backupops.objects.filter(name='Duplicate').count(), 1)
+        self.assertEqual(Backupops.objects.filter(name="Duplicate").count(), 1)

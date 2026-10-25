@@ -35,7 +35,7 @@ class BackupopsIndex(SearchIndex):
     #   2000 - Other discrete attributes
     #   5000 - Comments field
     fields = (
-        ('name', 100),          # Primary identifier
+        ("name", 100),  # Primary identifier
         # ('slug', 110),        # Uncomment if your model has a slug field
         # ('description', 500), # Uncomment if your model has a description field
         # ('comments', 5000),   # Uncomment if your model has a comments field
@@ -57,9 +57,7 @@ class BackupopsIndex(SearchIndex):
 
 # Register all search indexes for this plugin
 # The PluginConfig will automatically load these indexes
-indexes = (
-    BackupopsIndex,
-)
+indexes = (BackupopsIndex,)
 
 
 # Example: Multiple models with different search configurations

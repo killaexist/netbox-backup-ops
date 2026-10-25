@@ -18,9 +18,7 @@ from ..models import Backupops
 
 
 class BackupopsSerializer(NetBoxModelSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name="plugins-api:netbox_backup_ops-api:backupops-detail"
-    )
+    url = serializers.HyperlinkedIdentityField(view_name="plugins-api:netbox_backup_ops-api:backupops-detail")
 
     class Meta:
         model = Backupops

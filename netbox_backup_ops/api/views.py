@@ -17,4 +17,3 @@ from .serializers import BackupopsSerializer
 class BackupopsViewSet(NetBoxModelViewSet):
     queryset = Backupops.objects.all()
     serializer_class = BackupopsSerializer
-
