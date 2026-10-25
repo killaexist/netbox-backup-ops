@@ -1,18 +1,24 @@
-name: ci
+name: Docs
+
 on:
   push:
-    branches:
-      - master
-      - main
+    branches: [main]
+
 permissions:
   contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
         with:
-          python-version: 3.x
-      - run: pip install mkdocs-material mkdocs-autorefs mkdocstrings mkdocstrings-python-legacy mkdocs-include-markdown-plugin
-      - run: mkdocs gh-deploy --force
+          python-version: '3.12'
+
+      - name: Install MkDocs
+        run: pip install mkdocs-material mkdocs-autorefs mkdocstrings mkdocstrings-python-legacy mkdocs-include-markdown-plugin
+
+      - name: Deploy docs
+        run: mkdocs gh-deploy --force
