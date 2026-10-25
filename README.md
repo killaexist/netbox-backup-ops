@@ -46,7 +46,7 @@ No additional Python packages are required beyond NetBox's core dependencies.
 
 This plugin provides a REST API endpoint for managing Backup Ops resources:
 
-- `/api/plugins/netbox_backup_ops/backup-opss/` - List and create Backupops objects
+- `/api/plugins/netbox_backup_ops/backup-ops/` - List and create Backupops objects
 
 
 
