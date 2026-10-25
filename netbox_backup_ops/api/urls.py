@@ -15,7 +15,7 @@ from .views import BackupopsViewSet
 app_name = "netbox_backup_ops"
 
 router = NetBoxRouter()
-router.register("backup-opss", BackupopsViewSet)
+router.register("backup-ops", BackupopsViewSet)
 
 urlpatterns = router.urls
 
