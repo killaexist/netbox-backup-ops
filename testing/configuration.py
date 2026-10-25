@@ -43,7 +43,9 @@ REDIS = {
 
 # Security settings (test-only values)
 SECRET_KEY = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-API_TOKEN_PEPPERS = ["test-pepper-for-api-tokens"]
+API_TOKEN_PEPPERS = {
+    1: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+}
 
 # For testing, allow all hosts
 ALLOWED_HOSTS = ["*"]
