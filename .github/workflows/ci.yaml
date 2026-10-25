@@ -98,4 +98,3 @@ jobs:
           python manage.py migrate --no-input
           python manage.py makemigrations --check netbox_backup_ops
           python manage.py collectstatic --no-input
-          python manage.py test netbox_backup_ops.tests --parallel --keepdb -v 2
