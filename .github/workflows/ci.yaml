@@ -73,7 +73,7 @@ jobs:
             plugin/pyproject.toml
 
       - name: Clone NetBox
-        run: git clone --depth 1 --branch v4.5 https://github.com/netbox-community/netbox.git
+        run: git clone --depth 1 --branch v4.5.0 https://github.com/netbox-community/netbox.git
 
       - name: Install NetBox + plugin
         run: |
