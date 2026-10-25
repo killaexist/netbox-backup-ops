@@ -51,7 +51,7 @@ API_TOKEN_PEPPERS = {
 ALLOWED_HOSTS = ["*"]
 
 # Enable debug mode for testing
-DEBUG = True
+DEBUG = False
 
 # Plugin configuration
 PLUGINS = [
