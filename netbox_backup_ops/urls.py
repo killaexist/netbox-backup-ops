@@ -14,13 +14,13 @@ from netbox.views.generic import ObjectChangeLogView
 from . import models, views
 
 urlpatterns = (
-    path("backup-opss/", views.BackupopsListView.as_view(), name="backupops_list"),
-    path("backup-opss/add/", views.BackupopsEditView.as_view(), name="backupops_add"),
-    path("backup-opss/<int:pk>/", views.BackupopsView.as_view(), name="backupops"),
-    path("backup-opss/<int:pk>/edit/", views.BackupopsEditView.as_view(), name="backupops_edit"),
-    path("backup-opss/<int:pk>/delete/", views.BackupopsDeleteView.as_view(), name="backupops_delete"),
+    path("backup-ops/", views.BackupopsListView.as_view(), name="backupops_list"),
+    path("backup-ops/add/", views.BackupopsEditView.as_view(), name="backupops_add"),
+    path("backup-ops/<int:pk>/", views.BackupopsView.as_view(), name="backupops"),
+    path("backup-ops/<int:pk>/edit/", views.BackupopsEditView.as_view(), name="backupops_edit"),
+    path("backup-ops/<int:pk>/delete/", views.BackupopsDeleteView.as_view(), name="backupops_delete"),
     path(
-        "backup-opss/<int:pk>/changelog/",
+        "backup-ops/<int:pk>/changelog/",
         ObjectChangeLogView.as_view(),
         name="backupops_changelog",
         kwargs={"model": models.Backupops},
