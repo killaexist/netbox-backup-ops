@@ -24,7 +24,7 @@ class BackupopsConfig(PluginConfig):
     version = __version__
     base_url = "netbox_backup_ops"
     min_version = "4.5.0"
-    max_version = "4.5.99"
+    max_version = "4.7.99"
 
 
 config = BackupopsConfig
